@@ -9,6 +9,7 @@ export const state = reactive({
 
     fetchMovieData() {
         this.url = [this.base_url + '&query=' + this.movieQuery];
+        console.log(this.movieArray);
         axios.
             get(this.url)
             .then(response => {

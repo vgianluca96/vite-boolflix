@@ -1,13 +1,32 @@
 <script>
 import { state } from './state.js'
+import languageToCountry from './assets/js/languageToCountry.js'
+import countriesFlags from './assets/js/countriesFlags.js'
 
 export default {
   name: 'App',
   data() {
     return {
       state,
+      languageToCountry,
+      countriesFlags
     }
   },
+  methods: {
+
+    funzione(lang) {
+      let index = languageToCountry.language.indexOf(lang, 0);
+      if (index == -1) {
+        return false
+      } else {
+        let country = languageToCountry.country[index];
+        let countryFlag = countriesFlags.flags[country].mini;
+        return countryFlag
+      }
+
+    }
+
+  }
 }
 </script>
 
@@ -35,13 +54,21 @@ export default {
       </div>
 
       <div class="row g-2">
-        <div class="col-3" v-for="movie in state.movieArray">
+        <div class="col-12 text-center text-danger" v-if="state.movieQuery == '' && state.movieArray.length == 0">
+          <h2>Digitare delle parole chiave nella barra di ricerca</h2>
+        </div>
+        <div class="col-3" v-for="movie in state.movieArray" v-else>
           <div class="card h-100">
             <div class="card-body">
               <h5 class="card-title">{{ movie.original_title }} ({{ movie.title }})</h5>
               <p class="card-text">
               <ul>
-                <li>Lingua: {{ movie.original_language }}</li>
+                <li v-if="this.funzione(movie.original_language)">
+                  Lingua: <img :src="this.funzione(movie.original_language)" alt="">
+                </li>
+                <li v-else>
+                  Lingua: {{ movie.original_language }}
+                </li>
                 <li>Voto: {{ Math.round(Number(movie.vote_average) * 10) / 10 }}</li>
               </ul>
               </p>
