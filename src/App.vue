@@ -6,6 +6,9 @@ export default {
     return {
       state
     }
+  },
+  created() {
+    state.fetchMovie();
   }
 }
 </script>
