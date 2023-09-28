@@ -10,7 +10,7 @@ export default {
       state,
       languageToCountry,
       countriesFlags,
-      messageInfo: 'Digitare parole chiave e premere il tasto "Cerca"',
+      messageInfo: 'Digitare lettere o parole chiave e premere il tasto "Cerca"',
       messageError: ''
     }
   },
@@ -18,7 +18,7 @@ export default {
     sendQuery() {
       this.messageInfo = '';
       if (state.query == '') {
-        this.messageError = 'Digitare delle parole chiave nella barra di ricerca';
+        this.messageError = 'Barra di ricerca vuota';
       } else {
         this.messageError = '';
       }
