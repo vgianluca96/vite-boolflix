@@ -23,8 +23,19 @@ export default {
   <main>
 
     <div class="container py-4">
-      {{ state.message }}
+
+      <div class="row">
+        <div class="col col-6">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Digita lettere o parole contenute nel titolo"
+              aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-primary" type="button" id="btnMovie">Cerca film</button>
+          </div>
+        </div>
+      </div>
+
     </div>
+
 
   </main>
 </template>
