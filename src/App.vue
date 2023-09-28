@@ -1,4 +1,13 @@
 <script>
+import { state } from './state.js'
+
+export default {
+  data() {
+    return {
+      state
+    }
+  }
+}
 </script>
 
 <template>
@@ -11,7 +20,7 @@
   <main>
 
     <div class="container py-4">
-      ciao
+      {{ state.message }}
     </div>
 
   </main>
