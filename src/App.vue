@@ -6,8 +6,8 @@ import AppResults from './components/AppResults.vue'
 export default {
   name: 'App',
   components: {
+    AppHeader,
     AppResults,
-    AppHeader
   },
   data() {
     return {
@@ -41,9 +41,6 @@ export default {
 
       <div class="w-100 text-center text-light mb-3">
         <h2>{{ messageInfo }}</h2>
-      </div>
-
-      <div class="w-100 text-center text-uppercase text-light mb-3">
         <h2>{{ messageError }}</h2>
       </div>
 

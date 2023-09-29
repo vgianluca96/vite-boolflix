@@ -1,19 +1,53 @@
 @use "bootstrap/scss/bootstrap";
 
-.imgPoster {
-    width: 100%;
-    aspect-ratio: 1/1.5;
-    object-fit: cover;
+.resultCard {
+
+    position: relative;
+
+    .imgPoster {
+        width: 100%;
+        aspect-ratio: 1/1.5;
+        object-fit: cover;
+    }
+
+    .imgNotFound {
+        width: 100%;
+        aspect-ratio: 1/1.5;
+        background-color: black;
+        color: red;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 32px;
+    }
+
+    .resultDetails {
+        background-color: rgba($color: #000000, $alpha: 0.75);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        height: 100%;
+        overflow-y: auto;
+
+        div {
+            margin-bottom: 10px;
+        }
+
+        svg {
+            fill: yellow;
+        }
+    }
+
 }
 
-.imgNotFound {
-    width: 100%;
-    aspect-ratio: 1/1.5;
-    background-color: black;
-    color: red;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 32px;
+.resultCard:hover {
+
+    .resultDetails {
+        display: block;
+    }
+
 }
