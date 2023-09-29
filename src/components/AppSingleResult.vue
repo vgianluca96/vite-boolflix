@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-    <div class="col-3">
+    <div class="col-6 col-md-4 col-xl-3 col-xxl-2">
         <div class="card h-100">
             <img :src="[posterImg + result.poster_path]" class="imgPoster card-img-top" alt="..." v-if="result.poster_path">
             <div class="imgNotFound card-img-top" v-else>

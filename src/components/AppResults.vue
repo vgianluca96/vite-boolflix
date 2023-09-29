@@ -12,8 +12,21 @@ export default {
 </script>
 
 <template>
-    <div class="mb-3" v-if="messageInfo == ''">
-        <h4>La ricerca ha prodotto {{ resultsArray.length }} risultati</h4>
+    <div v-if="messageInfo == ''">
+        <div class="mb-3">
+            <h3 v-if="resultType == 'movie'">
+                Film
+            </h3>
+            <h3 v-else-if="resultType == 'series'">
+                Serie TV
+            </h3>
+        </div>
+
+        <div class="mb-3">
+            <h5>
+                La ricerca ha prodotto {{ resultsArray.length }} risultati
+            </h5>
+        </div>
     </div>
 
     <div class="row mb-3 g-3">
