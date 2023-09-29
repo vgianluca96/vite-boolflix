@@ -78,9 +78,14 @@ export default {
       <div class="mb-3" v-if="messageInfo == ''">
         <h4>La ricerca ha prodotto {{ state.movieArray.length }} risultati</h4>
       </div>
-      <div class="row mb-3">
+      <div class="row mb-3 g-3">
         <div class="col-3" v-for="movie in state.movieArray" v-if="state.movieArray.length > 0">
           <div class="card h-100">
+            <img :src="[state.baseImgUrl + movie.poster_path]" class="moviePoster card-img-top" alt="..."
+              v-if="movie.poster_path">
+            <div class="imgNotFound card-img-top" v-else>
+              not found
+            </div>
             <div class="card-body">
               <h5 class="card-title">{{ movie.title }} ({{ movie.original_title }})</h5>
               <p class="card-text">

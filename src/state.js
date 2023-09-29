@@ -2,7 +2,7 @@ import { reactive } from 'vue'
 import axios from 'axios'
 
 export const state = reactive({
-    query: 'matrix',
+    query: 'avengers',
 
     baseMovieUrl: 'https://api.themoviedb.org/3/search/movie?api_key=2ac860428212e4c9593f814d1c5e9efe&language=it-IT',
     movieUrl: '',
@@ -11,6 +11,8 @@ export const state = reactive({
     baseTVSeriesUrl: 'https://api.themoviedb.org/3/search/tv?api_key=2ac860428212e4c9593f814d1c5e9efe&language=it_IT',
     TVSeriesUrl: '',
     TVSeriesArray: [],
+
+    baseImgUrl: 'https://image.tmdb.org/t/p/w342/',
 
     fetchMovieData() {
         this.movieUrl = [this.baseMovieUrl + '&query=' + this.query];
