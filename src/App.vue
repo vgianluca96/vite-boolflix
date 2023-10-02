@@ -13,7 +13,8 @@ export default {
     return {
       state,
       messageInfo: 'Digitare lettere o parole chiave e premere il tasto "Search"',
-      messageError: ''
+      messageError: '',
+      genreFilter: 'null'
     }
   },
   methods: {
@@ -27,6 +28,10 @@ export default {
       state.fetchMovieData();
       state.fetchTVSeriesData();
     },
+    filter() {
+      console.log(genreFilter.value)
+      this.genreFilter = genreFilter.value;
+    }
   },
   mounted() {
     state.fetchGenres();
@@ -35,7 +40,7 @@ export default {
 </script>
 
 <template>
-  <AppHeader @sendQuery="this.sendQuery()" />
+  <AppHeader @sendQuery="this.sendQuery()" @filter="this.filter(genre)" />
 
   <main>
 
@@ -47,10 +52,10 @@ export default {
       </div>
 
       <AppResults :messageInfo="this.messageInfo" :resultsArray="state.movieArray" :posterImg="state.baseImgUrl"
-        :resultType="'movie'" :genresArray="state.movieGenresArray" />
+        :resultType="'movie'" :genresArray="state.movieGenresArray" :genreFilter="this.genreFilter" />
 
       <AppResults :messageInfo="this.messageInfo" :resultsArray="state.TVSeriesArray" :posterImg="state.baseImgUrl"
-        :resultType="'series'" :genresArray="state.TVSeriesGenresArray" />
+        :resultType="'series'" :genresArray="state.TVSeriesGenresArray" :genreFilter="this.genreFilter" />
 
     </div>
 

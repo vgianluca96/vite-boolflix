@@ -4,12 +4,12 @@ import { state } from '../state.js'
 
 export default {
     name: 'AppHeader',
-    props: ['sendQuery'],
+    emits: ['sendQuery', 'filter'],
     data() {
         return {
             state
         }
-    }
+    },
 }
 </script>
 
@@ -38,6 +38,12 @@ export default {
                             <a class="nav-link" href="#">Originali</a>
                         </li>
                     </ul>
+                    <select class="form-select w-25" id="genreFilter" aria-label="Default select example"
+                        @change="$emit('filter')">
+                        <option value='null' selected>Filtrare per genere</option>
+                        <option :value="genre.name" v-for="genre in state.movieGenresArray">{{ genre.name }}</option>
+                        <option :value="genre.name" v-for="genre in state.TVSeriesGenresArray">{{ genre.name }}</option>
+                    </select>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
                             v-model="state.query">

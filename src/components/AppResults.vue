@@ -4,7 +4,7 @@ import AppSingleResult from './AppSingleResult.vue'
 
 export default {
     name: 'AppResults',
-    props: ['messageInfo', 'resultsArray', 'posterImg', 'resultType', 'genresArray'],
+    props: ['messageInfo', 'resultsArray', 'posterImg', 'resultType', 'genresArray', 'genreFilter'],
     components: {
         AppSingleResult
     }
@@ -32,7 +32,7 @@ export default {
     <div class="row mb-3 g-3">
 
         <AppSingleResult v-for="result in resultsArray" v-if="resultsArray.length > 0" :result="result"
-            :posterImg="posterImg" :resultType="resultType" :genresArray="genresArray" />
+            :posterImg="posterImg" :resultType="resultType" :genresArray="genresArray" :genreFilter="genreFilter" />
 
     </div>
 </template>

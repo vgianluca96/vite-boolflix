@@ -6,7 +6,7 @@ import countriesFlags from '../assets/js/countriesFlags.js'
 
 export default {
     name: 'AppSingleResult',
-    props: ['result', 'posterImg', 'resultType', 'genresArray'],
+    props: ['result', 'posterImg', 'resultType', 'genresArray', 'genreFilter'],
     data() {
         return {
             state,
@@ -50,7 +50,8 @@ export default {
 </script>
 
 <template>
-    <div class="resultCard col-6 col-md-4 col-xl-3 col-xxl-2" @mouseover="this.getCast()">
+    <div class="resultCard col-6 col-md-4 col-xl-3 col-xxl-2" @mouseover="this.getCast()"
+        :class="{ 'd-none': !this.genres.includes(genreFilter) && genreFilter != 'null' }">
         <img :src="[posterImg + result.poster_path]" class="imgPoster" alt="..." v-if="result.poster_path">
         <div class="imgNotFound" v-else>
             poster not available
@@ -72,7 +73,7 @@ export default {
             </div>
             <div>
                 <strong>Voto</strong>:
-                <span v-for="n in 5">
+                <span v-for=" n  in  5 ">
                     <span v-if="n <= Math.round(result.vote_average / 2)">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em"
                             viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -92,16 +93,18 @@ export default {
             <div>
                 <strong>Genere</strong>:
                 <ul class="list-unstyled list-group-horizontal">
-                    <li v-for="genre in this.genres">{{ genre }}</li>
+                    <li v-for=" genre  in  this.genres ">{{ genre }}</li>
                 </ul>
             </div>
             <div>
                 <strong>Cast</strong>:
                 <ul class="list-unstyled list-group-horizontal">
-                    <li v-for="actor in state.movieCastArray.slice(0, 5)" v-if="this.resultType == 'movie'">{{ actor.name }}
-                    </li>
-                    <li v-for="actor in state.TVSeriesCastArray.slice(0, 5)" v-else-if="this.resultType == 'series'">{{
+                    <li v-for=" actor  in  state.movieCastArray.slice(0, 5) " v-if="this.resultType == 'movie'">{{
                         actor.name }}
+                    </li>
+                    <li v-for=" actor  in  state.TVSeriesCastArray.slice(0, 5) " v-else-if="this.resultType == 'series'">
+                        {{
+                            actor.name }}
                     </li>
                 </ul>
             </div>
