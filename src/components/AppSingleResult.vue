@@ -1,5 +1,6 @@
 <script>
 
+import { state } from '../state.js'
 import languageToCountry from '../assets/js/languageToCountry.js'
 import countriesFlags from '../assets/js/countriesFlags.js'
 
@@ -8,6 +9,7 @@ export default {
     props: ['result', 'posterImg', 'resultType', 'genresArray'],
     data() {
         return {
+            state,
             genres: [],
         }
     },
@@ -22,24 +24,33 @@ export default {
                 return countryFlag
             }
         },
-        getGenre() {
+        getGenres() {
             for (let i = 0; i < this.genresArray.length; i++) {
                 let index = this.result.genre_ids.indexOf(this.genresArray[i].id);
                 if (index != -1) {
-                    //console.log(this.genresArray[i].name);
                     this.genres.push(this.genresArray[i].name);
                 }
+            }
+        },
+        getCast() {
+            let id = this.result.id;
+            if (this.resultType == 'movie') {
+                state.fetchMovieCast(id);
+                //console.log(state.movieCastArray);
+            } else if (this.resultType == 'series') {
+                state.fetchTVSeriesCast(id);
+                //console.log(state.TVSeriesCastArray);
             }
         }
     },
     mounted() {
-        this.getGenre();
-    }
+        this.getGenres();
+    },
 }
 </script>
 
 <template>
-    <div class="resultCard col-6 col-md-4 col-xl-3 col-xxl-2">
+    <div class="resultCard col-6 col-md-4 col-xl-3 col-xxl-2" @mouseover="this.getCast()">
         <img :src="[posterImg + result.poster_path]" class="imgPoster" alt="..." v-if="result.poster_path">
         <div class="imgNotFound" v-else>
             poster not available
@@ -82,6 +93,16 @@ export default {
                 <strong>Genere</strong>:
                 <ul class="list-unstyled list-group-horizontal">
                     <li v-for="genre in this.genres">{{ genre }}</li>
+                </ul>
+            </div>
+            <div>
+                <strong>Cast</strong>:
+                <ul class="list-unstyled list-group-horizontal">
+                    <li v-for="actor in state.movieCastArray.slice(0, 5)" v-if="this.resultType == 'movie'">{{ actor.name }}
+                    </li>
+                    <li v-for="actor in state.TVSeriesCastArray.slice(0, 5)" v-else-if="this.resultType == 'series'">{{
+                        actor.name }}
+                    </li>
                 </ul>
             </div>
             <div>
