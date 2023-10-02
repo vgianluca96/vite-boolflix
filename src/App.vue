@@ -24,10 +24,12 @@ export default {
       } else {
         this.messageError = '';
       }
-      state.fetchMovieData()
-      state.fetchTVSeriesData()
-      //console.log(state);
+      state.fetchMovieData();
+      state.fetchTVSeriesData();
     },
+  },
+  mounted() {
+    state.fetchGenres();
   }
 }
 </script>
@@ -45,10 +47,10 @@ export default {
       </div>
 
       <AppResults :messageInfo="this.messageInfo" :resultsArray="state.movieArray" :posterImg="state.baseImgUrl"
-        :resultType="'movie'" />
+        :resultType="'movie'" :genresArray="state.genresArray" />
 
       <AppResults :messageInfo="this.messageInfo" :resultsArray="state.TVSeriesArray" :posterImg="state.baseImgUrl"
-        :resultType="'series'" />
+        :resultType="'series'" :genresArray="state.genresArray" />
 
     </div>
 

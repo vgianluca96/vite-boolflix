@@ -14,6 +14,9 @@ export const state = reactive({
 
     baseImgUrl: 'https://image.tmdb.org/t/p/w342/',
 
+    genresUrl: 'https://api.themoviedb.org/3/genre/movie/list?language=it-IT&api_key=2ac860428212e4c9593f814d1c5e9efe',
+    genresArray: [],
+
     fetchMovieData() {
         this.movieUrl = [this.baseMovieUrl + '&query=' + this.query];
         axios.
@@ -36,6 +39,14 @@ export const state = reactive({
             })
             .catch(error => {
                 console.log(error);
+            })
+    },
+    fetchGenres() {
+        axios.
+            get(this.genresUrl)
+            .then(response => {
+                this.genresArray = response.data.genres;
+                console.log(this.genresArray);
             })
     }
 })

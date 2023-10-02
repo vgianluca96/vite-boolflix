@@ -5,7 +5,12 @@ import countriesFlags from '../assets/js/countriesFlags.js'
 
 export default {
     name: 'AppSingleResult',
-    props: ['result', 'posterImg', 'resultType'],
+    props: ['result', 'posterImg', 'resultType', 'genresArray'],
+    data() {
+        return {
+            genres: [],
+        }
+    },
     methods: {
         searchFlag(language) {
             let index = languageToCountry.language.indexOf(language, 0);
@@ -16,7 +21,19 @@ export default {
                 let countryFlag = countriesFlags.flags[country].mini;
                 return countryFlag
             }
+        },
+        getGenre() {
+            for (let i = 0; i < this.genresArray.length; i++) {
+                let index = this.result.genre_ids.indexOf(this.genresArray[i].id);
+                if (index != -1) {
+                    //console.log(this.genresArray[i].name);
+                    this.genres.push(this.genresArray[i].name);
+                }
+            }
         }
+    },
+    mounted() {
+        this.getGenre();
     }
 }
 </script>
@@ -60,6 +77,12 @@ export default {
                         </svg>
                     </span>
                 </span>
+            </div>
+            <div>
+                <strong>Genere</strong>:
+                <ul class="list-unstyled list-group-horizontal">
+                    <li v-for="genre in this.genres">{{ genre }}</li>
+                </ul>
             </div>
             <div>
                 <strong>Overview</strong>: {{ result.overview }}
