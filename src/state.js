@@ -14,8 +14,11 @@ export const state = reactive({
 
     baseImgUrl: 'https://image.tmdb.org/t/p/w342/',
 
-    genresUrl: 'https://api.themoviedb.org/3/genre/movie/list?language=it-IT&api_key=2ac860428212e4c9593f814d1c5e9efe',
-    genresArray: [],
+    movieGenresUrl: 'https://api.themoviedb.org/3/genre/movie/list?language=it-IT&api_key=2ac860428212e4c9593f814d1c5e9efe',
+    movieGenresArray: [],
+
+    TVSeriesGenresUrl: 'https://api.themoviedb.org/3/genre/tv/list?language=it-IT&api_key=2ac860428212e4c9593f814d1c5e9efe',
+    TVSeriesGenresArray: [],
 
     baseMovieCastUrl: 'https://api.themoviedb.org/3/movie/',
     movieCastUrl: '',
@@ -51,14 +54,24 @@ export const state = reactive({
     },
     fetchGenres() {
         axios
-            .get(this.genresUrl)
+            .get(this.movieGenresUrl)
             .then(response => {
-                this.genresArray = response.data.genres;
-                console.log(this.genresArray);
+                this.movieGenresArray = response.data.genres;
+                console.log(this.movieGenresArray);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        axios
+            .get(this.TVSeriesGenresUrl)
+            .then(response => {
+                this.TVSeriesGenresArray = response.data.genres;
+                console.log(this.TVSeriesGenresArray);
             })
             .catch(error => {
                 console.log(error);
             })
+
     },
     fetchMovieCast(id) {
         this.movieCastUrl = [this.baseMovieCastUrl + id + '/credits?language=en-US&api_key=2ac860428212e4c9593f814d1c5e9efe'];
@@ -71,7 +84,6 @@ export const state = reactive({
             .catch(error => {
                 console.log(error);
             })
-
     },
     fetchTVSeriesCast(id) {
         this.TVSeriesCastUrl = [this.baseTVSeriesCastUrl + id + '/credits?language=en-US&api_key=2ac860428212e4c9593f814d1c5e9efe'];

@@ -47,10 +47,10 @@ export default {
       </div>
 
       <AppResults :messageInfo="this.messageInfo" :resultsArray="state.movieArray" :posterImg="state.baseImgUrl"
-        :resultType="'movie'" :genresArray="state.genresArray" />
+        :resultType="'movie'" :genresArray="state.movieGenresArray" />
 
       <AppResults :messageInfo="this.messageInfo" :resultsArray="state.TVSeriesArray" :posterImg="state.baseImgUrl"
-        :resultType="'series'" :genresArray="state.genresArray" />
+        :resultType="'series'" :genresArray="state.TVSeriesGenresArray" />
 
     </div>
 
